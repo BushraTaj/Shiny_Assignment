@@ -1,0 +1,59 @@
+---
+title: "BMIFinder"
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+  beamer_presentation: default
+date: "2023-08-14"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Slide with Bullets
+
+- BMI is body mass index.
+- It used height and body weight.
+- It measures the body health status.
+
+## Slide with Bullets
+
+- It takes the height in meters.
+- It takes weight in Kgs.
+- To get the BMI, divide the weight with height.
+
+
+## Slide with R Output
+
+```{r echo = TRUE}
+library(shiny)
+ui <- fluidPage(
+  titlePanel("All About Health! All About Your BMI!"),
+  sidebarLayout(
+    sidebarPanel(
+      numericInput("n1", "My Weight in Kgs", 0),
+      numericInput("n2", "My Height in meters", 0),
+      actionButton("BMI", "What is my BMI?")
+    ),
+    mainPanel(textOutput(outputId = "n1_divide_n2"))
+  )
+)
+```
+
+## Slide with R output
+
+```{r echo=TRUE}
+library(shiny)
+server <- function(input, output){
+  observeEvent(input$BMI, {
+    bmi <- input$n1 + input$n2
+    add_text <- sprintf("Your BMI is %d / %d = %d", input$n1, input$n2, bmi)
+    output$n1_divide_n2 <- renderText(add_text)
+  })
+}
+
+```
+
+
